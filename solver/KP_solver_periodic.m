@@ -28,7 +28,7 @@ function KP_solver_periodic( t, xmax, Nx,...
   dt = 1e-1;
 
   % Setup grid
-  Lx = xmax; Ly = ymax;
+    Lx = xmax; Ly = ymax;
     x = (2*Lx/Nx)*(-Nx/2:Nx/2-1)';
     y = (2*Ly/Ny)*(-Ny/2:Ny/2-1)';
     [X,Y] = meshgrid(x,y);
@@ -68,7 +68,9 @@ function KP_solver_periodic( t, xmax, Nx,...
   start = tic;
 
   % Get soln using RK4 timestepper 
- 
+  % ERROR: This doesn't work because ode45 only accepts vectors for v
+  % IDEA: use Camassa-Holm workaround, myode45.m
+  
     ode45(@(t,v) compute_deriv( t, v, iphi, KX),...
                                  tout, v_init, opts);
  
